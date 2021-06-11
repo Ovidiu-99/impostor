@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Impostor</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="cliente/styleSheet.css">
+	<link rel='icon' href='cliente/favicon.ico' type='image/x-icon' sizes="16x16" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="cliente/src/clienteRest.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+	<script src="cliente/src/clienteWS.js"></script>
+	<script src="cliente/src/controlWeb.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
+	<script src="cliente/src/game.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="navbar">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="">Impostor</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a onclick="rest.partidasCreadas('adminOvidiu')">PARTIDAS ANTERIORES</a></li>
+						<li><a onclick="rest.partidasTerminadas('adminOvidiu')">PARTIDAS TERMINADAS</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="jumbotron text-center">
+			<h1>Impostor</h1>
+			<p>El juego del impostor</p>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div id="crearPartida"></div>
+				<div id="esperando"></div>
+			</div>
+			<div class="col-sm-6">
+				<div id="unirAPartida"></div>
+				<div id="listaEsperando"></div>
+			</div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-sm-6">
+				<div id="chat"></div>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-sm-12">
+				<div id="partidasAnteriores"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="juegoPhaser" class="col-sm-12">
+				<div id="game-container"></div>
+			</div>
+		</div>
+		<div class="modal" id="modalGeneral" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Impostor</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body" id="textoModal">
+					<div class="row">
+						<div class="col-sm-12">
+							<div id="chat"></div>
+						</div>
+					</div>
+				  <!-- <p>Eres un impostor, hazte con todos.</p> -->
+				</div>
+				<div class="modal-footer" id="pie">
+
+				  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+				  <!-- <button type="button" id="cerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+				</div>
+			  </div>
+			</div>
+		  </div>
+	</div>
+	<script>
+		var rest = new ClienteRest();
+		var ws = new ClienteWS();
+		var cw = new ControlWeb($);
+		cw.mostrarCrearPartida(4);
+		ws.listaPartidasDisponibles();
+	</script>
+</body>
+
+</html>
